@@ -6,33 +6,33 @@ package frc.robot.subsystems;
 
 // import edu.wpi.first.wpilibj.DigitalInput;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class ShoulderTurnSubsystem extends SubsystemBase {
+public class ArmSubsystem extends SubsystemBase {
 
-  private CANSparkMax shoulderTurnSparkMax;
+  private CANSparkMax ArmSparkMax;
   // DigitalInput toplimitSwitch = new DigitalInput(0);
   // DigitalInput bottomlimitSwitch = new DigitalInput(1);
 
   /** Creates a new Climber. */
-  public ShoulderTurnSubsystem() {
+  public ArmSubsystem() {
 
-    shoulderTurnSparkMax = new CANSparkMax(Constants.kMotorPortShoulderTurn, MotorType.kBrushed);
-    shoulderTurnSparkMax.setInverted(false);
+    ArmSparkMax = new CANSparkMax(Constants.kMotorPortArm, MotorType.kBrushed);
+    ArmSparkMax.setInverted(false);
   }
 
-  public void ShoulderTurnRight() {
-    shoulderTurnSparkMax.set(Constants.kShoulderTurnSpeed);
+  public void ArmRaise() {
+    ArmSparkMax.set(Constants.kArmSpeed);
   }
 
-  public void ShoulderTurnLeft() {
-    shoulderTurnSparkMax.set(-Constants.kShoulderTurnSpeed);
+  public void ArmLower() {
+    ArmSparkMax.set(-Constants.kArmSpeed * -1);
   }
 
   public void ShoulderTurnStop() {
-    shoulderTurnSparkMax.set(0);
+    ArmSparkMax.set(0);
   }
 
   @Override

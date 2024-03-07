@@ -13,6 +13,8 @@ import frc.robot.Constants;
 public class IntakeSubsystem extends SubsystemBase {
 
   private CANSparkMax intakeSparkMax;
+  
+  
   DigitalInput GamePieceDetector = new DigitalInput(0);
   // DigitalInput bottomlimitSwitch = new DigitalInput(1);
 
@@ -24,9 +26,17 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void IntakeGamePiece() {
-    if(GamePieceDetector.get() = true){
+    if(GamePieceDetector == null){
       intakeSparkMax.set(Constants.kIntakeSpeed);
     }
+    else {
+      intakeSparkMax.set(0);
+    }
+
+  }
+
+  public void PushGamePieceIntoShooter() {
+    intakeSparkMax.set(Constants.kIntakeSpeed);
   }
 
   public void OuttakeGamePiece() {

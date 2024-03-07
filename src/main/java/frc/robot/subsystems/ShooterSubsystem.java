@@ -6,33 +6,34 @@ package frc.robot.subsystems;
 
 // import edu.wpi.first.wpilibj.DigitalInput;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class ShoulderTurnSubsystem extends SubsystemBase {
+public class ShooterSubsystem extends SubsystemBase {
 
-  private CANSparkMax shoulderTurnSparkMax;
+  private CANSparkMax ShooterUpperSparkMax;
+  private CANSparkMax ShooterLowerSparkMax;
   // DigitalInput toplimitSwitch = new DigitalInput(0);
   // DigitalInput bottomlimitSwitch = new DigitalInput(1);
 
   /** Creates a new Climber. */
-  public ShoulderTurnSubsystem() {
+  public ShooterSubsystem() {
 
-    shoulderTurnSparkMax = new CANSparkMax(Constants.kMotorPortShoulderTurn, MotorType.kBrushed);
-    shoulderTurnSparkMax.setInverted(false);
+    ShooterUpperSparkMax = new CANSparkMax(Constants.kMotorPortShooterUpper, MotorType.kBrushed);
+    ShooterLowerSparkMax = new CANSparkMax(Constants.kMotorPortShooterLower, MotorType.kBrushed);
+    ShooterUpperSparkMax.setInverted(false);
+    ShooterLowerSparkMax.setInverted(true);
   }
 
-  public void ShoulderTurnRight() {
-    shoulderTurnSparkMax.set(Constants.kShoulderTurnSpeed);
+  public void ShooterOn() {
+    ShooterUpperSparkMax.set(Constants.kShooterSpeed);
+    ShooterLowerSparkMax.set(Constants.kShooterSpeed);
   }
 
-  public void ShoulderTurnLeft() {
-    shoulderTurnSparkMax.set(-Constants.kShoulderTurnSpeed);
-  }
-
-  public void ShoulderTurnStop() {
-    shoulderTurnSparkMax.set(0);
+  public void ShooterStop() {
+    ShooterUpperSparkMax.set(0);
+    ShooterLowerSparkMax.set(0);
   }
 
   @Override

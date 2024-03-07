@@ -28,10 +28,10 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void ArmLower() {
-    ArmSparkMax.set(-Constants.kArmSpeed * -1);
+    ArmSparkMax.set(-Constants.kArmSpeed);
   }
 
-  public void ShoulderTurnStop() {
+  public void ArmStop() {
     ArmSparkMax.set(0);
   }
 

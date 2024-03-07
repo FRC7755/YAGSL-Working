@@ -4,18 +4,18 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ElbowSubsystem;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.ShooterSubsystem;
 
-public class ElbowDownCommand extends CommandBase {
+public class RunShooterCommand extends Command {
   /** Creates a new ClimberDownCommand. */
 
-  private final ElbowSubsystem elbowSubsystem;
+  private final ShooterSubsystem shooterSubsystem;
 
-  public ElbowDownCommand( ElbowSubsystem subsystem) {
-    elbowSubsystem = subsystem;
+  public RunShooterCommand(ShooterSubsystem subsystem) {
+    shooterSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements( elbowSubsystem );
+    addRequirements( shooterSubsystem );
   }
 
   // Called when the command is initially scheduled.
@@ -25,13 +25,13 @@ public class ElbowDownCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  //  elbowSubsystem.ElbowDown();
+    shooterSubsystem.ShooterOn();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-  //  elbowSubsystem.ElbowStop();
+    shooterSubsystem.ShooterStop();
   }
 
   // Returns true when the command should end.

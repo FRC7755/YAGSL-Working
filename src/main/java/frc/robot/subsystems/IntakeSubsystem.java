@@ -35,7 +35,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   }
 
-  public void PushGamePieceIntoShooter() {
+  public void FeedShooter() {
     intakeSparkMax.set(Constants.kIntakeSpeed);
   }
 

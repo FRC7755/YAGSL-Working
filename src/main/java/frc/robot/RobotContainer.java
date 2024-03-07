@@ -11,6 +11,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -20,7 +21,17 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
+//import frc.robot.commands.Command;
+import frc.robot.commands.RunShooterCommand;
+import frc.robot.commands.FeedShooterCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.OuttakeCommand;
+import frc.robot.commands.ArmLowerCommand;
+import frc.robot.commands.ArmRaiseCommand;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 import java.io.File;
 
 /**
@@ -34,6 +45,11 @@ public class RobotContainer
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                          "swerve/neo"));
+  
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  private final ArmSubsystem armSubsystem = new ArmSubsystem();
+
   // CommandJoystick rotationController = new CommandJoystick(1);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   CommandJoystick driverController = new CommandJoystick(1);
@@ -111,6 +127,13 @@ public class RobotContainer
                                    new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))
                               ));
     new JoystickButton(driverXbox, 4).whileTrue(new InstantCommand(drivebase::lock, drivebase));
+    new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new RunShooterCommand(shooterSubsystem));
+    new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new FeedShooterCommand(intakeSubsystem));
+    new JoystickButton(shooterXbox, Button.kX.value).whileTrue(new IntakeCommand(intakeSubsystem));
+    new JoystickButton(shooterXbox, Button.kB.value).whileTrue(new OuttakeCommand(intakeSubsystem));
+    new JoystickButton(shooterXbox, Button.kRightBumper.value).whileTrue(new ArmLowerCommand(armSubsystem));
+    new JoystickButton(shooterXbox, Button.kLeftBumper.value).whileTrue(new ArmRaiseCommand(armSubsystem));
+
   }
 
   /**

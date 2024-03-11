@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -25,27 +27,30 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeSparkMax.setInverted(false);
   }
 
-  public void IntakeGamePiece() {
+  public Command IntakeGamePiece() {
     if(GamePieceDetector == null){
       intakeSparkMax.set(Constants.kIntakeSpeed);
     }
     else {
       intakeSparkMax.set(0);
     }
-
+    return null;
   }
 
-  public void FeedShooter() {
+  public Command FeedShooter() {
     intakeSparkMax.set(Constants.kIntakeSpeed);
+    return null;
   }
 
-  public void OuttakeGamePiece() {
+  public Command OuttakeGamePiece() {
     intakeSparkMax.set(Constants.kIntakeSpeed * -1);
+    return null;
   }
 
 
-  public void IntakeStop() {
+  public Command IntakeStop() {
     intakeSparkMax.set(0);
+    return null;
   }
 
   @Override

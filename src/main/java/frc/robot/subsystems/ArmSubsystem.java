@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 // import edu.wpi.first.wpilibj.DigitalInput;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -23,16 +25,19 @@ public class ArmSubsystem extends SubsystemBase {
     ArmSparkMax.setInverted(false);
   }
 
-  public void ArmRaise() {
+  public Command ArmRaise() {
     ArmSparkMax.set(Constants.kArmSpeed);
+    return null;
   }
 
-  public void ArmLower() {
+  public Command ArmLower() {
     ArmSparkMax.set(-Constants.kArmSpeed);
+    return null;
   }
 
-  public void ArmStop() {
+  public Command ArmStop() {
     ArmSparkMax.set(0);
+    return null;
   }
 
   @Override

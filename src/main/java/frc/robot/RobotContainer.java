@@ -22,16 +22,16 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 //import frc.robot.commands.Command;
-//import frc.robot.commands.RunShooterCommand;
-//import frc.robot.commands.FeedShooterCommand;
-//import frc.robot.commands.IntakeCommand;
-//import frc.robot.commands.OuttakeCommand;
-//import frc.robot.commands.ArmLowerCommand;
-//import frc.robot.commands.ArmRaiseCommand;
+import frc.robot.commands.RunShooterCommand;
+import frc.robot.commands.FeedShooterCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.OuttakeCommand;
+import frc.robot.commands.ArmLowerCommand;
+import frc.robot.commands.ArmRaiseCommand;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
-//import frc.robot.subsystems.IntakeSubsystem;
-//import frc.robot.subsystems.ShooterSubsystem;
-//import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 import java.io.File;
 
 import com.pathplanner.lib.auto.NamedCommands;
@@ -49,9 +49,9 @@ public class RobotContainer
   private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                          "swerve/neo"));
   
-//  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-//  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-//  private final ArmSubsystem armSubsystem = new ArmSubsystem();
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  private final ArmSubsystem armSubsystem = new ArmSubsystem();
 
   // CommandJoystick rotationController = new CommandJoystick(1);
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -69,7 +69,14 @@ public class RobotContainer
     // Configure the trigger bindings
     configureBindings();
 
-//    NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
+    NamedCommands.registerCommand("Intake", intakeSubsystem.IntakeGamePiece());
+    NamedCommands.registerCommand("Feed", intakeSubsystem.FeedShooter());
+    NamedCommands.registerCommand("Intake Stop", intakeSubsystem.IntakeStop());
+    NamedCommands.registerCommand("Shoot", shooterSubsystem.ShooterOn());
+    NamedCommands.registerCommand("Shooter Stop", shooterSubsystem.ShooterStop());
+    NamedCommands.registerCommand("Arm Lower", armSubsystem.ArmLower());
+    NamedCommands.registerCommand("Arm Raise", armSubsystem.ArmRaise());
+
 
     AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
                                                                    () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
@@ -132,12 +139,12 @@ public class RobotContainer
                                    new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))
                               ));
     new JoystickButton(driverXbox, 4).whileTrue(new InstantCommand(drivebase::lock, drivebase));
-//    new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new RunShooterCommand(shooterSubsystem));
-//    new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new FeedShooterCommand(intakeSubsystem));
-//    new JoystickButton(shooterXbox, Button.kX.value).whileTrue(new IntakeCommand(intakeSubsystem));
-//    new JoystickButton(shooterXbox, Button.kB.value).whileTrue(new OuttakeCommand(intakeSubsystem));
-//    new JoystickButton(shooterXbox, Button.kRightBumper.value).whileTrue(new ArmLowerCommand(armSubsystem));
-//    new JoystickButton(shooterXbox, Button.kLeftBumper.value).whileTrue(new ArmRaiseCommand(armSubsystem));
+    new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new RunShooterCommand(shooterSubsystem));
+    new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new FeedShooterCommand(intakeSubsystem));
+    new JoystickButton(shooterXbox, Button.kX.value).whileTrue(new IntakeCommand(intakeSubsystem));
+    new JoystickButton(shooterXbox, Button.kB.value).whileTrue(new OuttakeCommand(intakeSubsystem));
+    new JoystickButton(shooterXbox, Button.kRightBumper.value).whileTrue(new ArmLowerCommand(armSubsystem));
+    new JoystickButton(shooterXbox, Button.kLeftBumper.value).whileTrue(new ArmRaiseCommand(armSubsystem));
 
   }
 

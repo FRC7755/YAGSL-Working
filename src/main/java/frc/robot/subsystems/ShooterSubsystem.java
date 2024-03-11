@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 // import edu.wpi.first.wpilibj.DigitalInput;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -26,14 +28,16 @@ public class ShooterSubsystem extends SubsystemBase {
     ShooterLowerSparkMax.setInverted(true);
   }
 
-  public void ShooterOn() {
+  public Command ShooterOn() {
     ShooterUpperSparkMax.set(Constants.kShooterSpeed);
     ShooterLowerSparkMax.set(Constants.kShooterSpeed);
+    return null;
   }
 
-  public void ShooterStop() {
+  public Command ShooterStop() {
     ShooterUpperSparkMax.set(0);
     ShooterLowerSparkMax.set(0);
+    return null;
   }
 
   @Override

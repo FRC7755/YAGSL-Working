@@ -26,8 +26,12 @@ public final class Constants
   public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
 
   public static final int kMotorPortIntake  = 17;
-  public static final int kMotorPortClimber  = 15;
+
+  public static final int kMotorPortClimberLeft  = 15;
+  public static final int kMotorPortClimberRight  = 18;
+
   public static final int kMotorPortArm  = 14;
+
   public static final int kMotorPortShooterUpper  = 13;
   public static final int kMotorPortShooterLower  = 16;
 

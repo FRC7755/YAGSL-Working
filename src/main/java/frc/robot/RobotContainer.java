@@ -132,13 +132,14 @@ public class RobotContainer
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
     new JoystickButton(driverXbox, 1).onTrue((new InstantCommand(drivebase::zeroGyro)));
-    new JoystickButton(driverXbox, 3).onTrue(new InstantCommand(drivebase::addFakeVisionReading));
+//    new JoystickButton(driverXbox, 3).onTrue(new InstantCommand(drivebase::addFakeVisionReading));
     new JoystickButton(driverXbox,
                        2).whileTrue(
         Commands.deferredProxy(() -> drivebase.driveToPose(
                                    new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))
                               ));
     new JoystickButton(driverXbox, 4).whileTrue(new InstantCommand(drivebase::lock, drivebase));
+
     new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new RunShooterCommand(shooterSubsystem));
     new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new FeedShooterCommand(intakeSubsystem));
     new JoystickButton(shooterXbox, Button.kX.value).whileTrue(new IntakeCommand(intakeSubsystem));

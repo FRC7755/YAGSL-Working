@@ -12,27 +12,33 @@ import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
 
-  private CANSparkMax ClimberSparkMax;
+  private CANSparkMax ClimberLeftSparkMax;
+  private CANSparkMax ClimberRightSparkMax;
   // DigitalInput toplimitSwitch = new DigitalInput(0);
   // DigitalInput bottomlimitSwitch = new DigitalInput(1);
 
   /** Creates a new Climber. */
   public ClimberSubsystem() {
 
-    ClimberSparkMax = new CANSparkMax(Constants.kMotorPortClimber, MotorType.kBrushed);
-    ClimberSparkMax.setInverted(false);
+    ClimberLeftSparkMax = new CANSparkMax(Constants.kMotorPortClimberLeft, MotorType.kBrushed);
+    ClimberRightSparkMax = new CANSparkMax(Constants.kMotorPortClimberRight, MotorType.kBrushed);
+    ClimberLeftSparkMax.setInverted(false);
+    ClimberRightSparkMax.setInverted(false);
   }
 
   public void ClimberRaise() {
-    ClimberSparkMax.set(Constants.kClimberSpeed);
+    ClimberLeftSparkMax.set(Constants.kClimberSpeed);
+    ClimberRightSparkMax.set(Constants.kClimberSpeed);
   }
 
   public void ClimberLower() {
-    ClimberSparkMax.set(-Constants.kClimberSpeed);
+    ClimberLeftSparkMax.set(-Constants.kClimberSpeed);
+    ClimberRightSparkMax.set(-Constants.kClimberSpeed);
   }
 
   public void ClimberStop() {
-    ClimberSparkMax.set(0);
+    ClimberLeftSparkMax.set(0);
+    ClimberRightSparkMax.set(0);
   }
 
   @Override

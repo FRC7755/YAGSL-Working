@@ -4,39 +4,29 @@
 
 package frc.robot.subsystems;
 
-// import edu.wpi.first.wpilibj.DigitalInput;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkLowLevel.MotorType;
-
+import edu.wpi.first.wpilibj.Solenoid;
+//import edu.wpi.first.wpilibj.PneumaticsControlModule;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+//import edu.wpi.first.wpilibj.Solenoid.Value;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 
 public class ArmSubsystem extends SubsystemBase {
+  private final Solenoid arm = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
 
-  private CANSparkMax ArmSparkMax;
-  // DigitalInput toplimitSwitch = new DigitalInput(0);
-  // DigitalInput bottomlimitSwitch = new DigitalInput(1);
+  /**Creates a new Pneumatics subsystem with a PCM and two solenoids */
 
-  /** Creates a new Climber. */
-  public ArmSubsystem() {
+  /**Runs the toggle() method on both solenoids.*/
 
-    ArmSparkMax = new CANSparkMax(Constants.kMotorPortArm, MotorType.kBrushed);
-    ArmSparkMax.setInverted(false);
+  public Command ArmLower() {
+    //  ArmSparkMax.set(Constants.kArmSpeed);
+    arm.set(true);
+    return null;
   }
 
   public Command ArmRaise() {
-    ArmSparkMax.set(Constants.kArmSpeed);
-    return null;
-  }
-
-  public Command ArmLower() {
-    ArmSparkMax.set(-Constants.kArmSpeed);
-    return null;
-  }
-
-  public Command ArmStop() {
-    ArmSparkMax.set(0);
+    //  ArmSparkMax.set(Constants.kArmSpeed);
+    arm.set(false);
     return null;
   }
 

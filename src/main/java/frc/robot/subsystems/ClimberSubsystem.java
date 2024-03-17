@@ -22,7 +22,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
     ClimberLeftSparkMax = new CANSparkMax(Constants.kMotorPortClimberLeft, MotorType.kBrushed);
     ClimberRightSparkMax = new CANSparkMax(Constants.kMotorPortClimberRight, MotorType.kBrushed);
-    ClimberLeftSparkMax.setInverted(false);
+    ClimberLeftSparkMax.setInverted(true);
     ClimberRightSparkMax.setInverted(false);
   }
 

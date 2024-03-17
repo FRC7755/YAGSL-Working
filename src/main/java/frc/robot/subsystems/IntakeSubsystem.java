@@ -28,7 +28,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public Command IntakeGamePiece() {
-    if(GamePieceDetector == null){
+    if(GamePieceDetector != null){
       intakeSparkMax.set(Constants.kIntakeSpeed);
     }
     else {

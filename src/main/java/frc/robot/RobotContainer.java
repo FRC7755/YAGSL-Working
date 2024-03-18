@@ -22,18 +22,18 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 //import frc.robot.commands.Command;
-//import frc.robot.commands.RunShooterCommand;
+import frc.robot.commands.RunShooterCommand;
 //import frc.robot.commands.FeedShooterCommand;
-//import frc.robot.commands.IntakeCommand;
-//import frc.robot.commands.OuttakeCommand;
-//import frc.robot.commands.ArmLowerCommand;
-//import frc.robot.commands.ArmRaiseCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.OuttakeCommand;
+import frc.robot.commands.ArmLowerCommand;
+import frc.robot.commands.ArmRaiseCommand;
 import frc.robot.commands.ClimberLowerCommand;
 import frc.robot.commands.ClimberRaiseCommand;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
-//import frc.robot.subsystems.IntakeSubsystem;
-//import frc.robot.subsystems.ShooterSubsystem;
-//import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 
 import java.io.File;
@@ -53,9 +53,9 @@ public class RobotContainer
   private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                          "swerve/neo"));
   
-//  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-//  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-//  private final ArmSubsystem armSubsystem = new ArmSubsystem();
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  private final ArmSubsystem armSubsystem = new ArmSubsystem();
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 
   // CommandJoystick rotationController = new CommandJoystick(1);
@@ -146,12 +146,12 @@ public class RobotContainer
     new JoystickButton(driverXbox, 4).whileTrue(new ClimberRaiseCommand(climberSubsystem));
     new JoystickButton(driverXbox, 1).whileTrue(new ClimberLowerCommand(climberSubsystem));
 
-//    new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new RunShooterCommand(shooterSubsystem));
+    new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new RunShooterCommand(shooterSubsystem));
 //    new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new FeedShooterCommand(intakeSubsystem));
-//    new JoystickButton(shooterXbox, Button.kX.value).whileTrue(new IntakeCommand(intakeSubsystem));
-//    new JoystickButton(shooterXbox, Button.kB.value).whileTrue(new OuttakeCommand(intakeSubsystem));
-//    new JoystickButton(shooterXbox, Button.kRightBumper.value).whileTrue(new ArmLowerCommand(armSubsystem));
-//    new JoystickButton(shooterXbox, Button.kLeftBumper.value).whileTrue(new ArmRaiseCommand(armSubsystem));
+    new JoystickButton(shooterXbox, Button.kX.value).whileTrue(new IntakeCommand(intakeSubsystem));
+    new JoystickButton(shooterXbox, Button.kB.value).whileTrue(new OuttakeCommand(intakeSubsystem));
+    new JoystickButton(shooterXbox, Button.kRightBumper.value).whileTrue(new ArmLowerCommand(armSubsystem));
+    new JoystickButton(shooterXbox, Button.kLeftBumper.value).whileTrue(new ArmRaiseCommand(armSubsystem));
 
   }
 

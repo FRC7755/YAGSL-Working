@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -38,6 +40,7 @@ import frc.robot.subsystems.ClimberSubsystem;
 
 import java.io.File;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
@@ -66,6 +69,7 @@ public class RobotContainer
   XboxController driverXbox = new XboxController(0);
   XboxController shooterXbox = new XboxController(1);
 
+  private final SendableChooser<Command> autoChooser;
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -82,6 +86,8 @@ public class RobotContainer
 //   NamedCommands.registerCommand("Arm Lower", armSubsystem.ArmLower());
 //    NamedCommands.registerCommand("Arm Raise", armSubsystem.ArmRaise());
 
+autoChooser = AutoBuilder.buildAutoChooser();
+SmartDashboard.putData("Auto Chooser", autoChooser);
 
     AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
                                                                    () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
@@ -163,7 +169,8 @@ public class RobotContainer
   public Command getAutonomousCommand()
   {
     // An example command will be run in autonomous
-    return new PathPlannerAuto("Center");
+//    return new PathPlannerAuto("Center");
+    return autoChooser.getSelected();
   //  return null;
   }
 

@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 // import edu.wpi.first.wpilibj.DigitalInput;
 //import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -32,6 +33,8 @@ public class ClimberSubsystem extends SubsystemBase {
 //    ClimberRightSparkMax = new CANSparkMax(Constants.kMotorPortClimberRight, MotorType.kBrushed);
     ClimberLeftSparkMax.setInverted(true);
     ClimberRightSparkMax.setInverted(false);
+    ClimberLeftSparkMax.setNeutralMode(NeutralMode.Brake);
+    ClimberRightSparkMax.setNeutralMode(NeutralMode.Brake);
   }
 
   public void ClimberRaise() {

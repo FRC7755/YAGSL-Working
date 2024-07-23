@@ -32,6 +32,7 @@ import frc.robot.commands.ArmLowerCommand;
 import frc.robot.commands.ArmRaiseCommand;
 import frc.robot.commands.ClimberLowerCommand;
 import frc.robot.commands.ClimberRaiseCommand;
+import frc.robot.commands.FeedShooterCommand;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -53,13 +54,13 @@ public class RobotContainer
 {
 
   // The robot's subsystems and commands are defined here...
-  private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
+  public final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                          "swerve/neo"));
   
-  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  private final ArmSubsystem armSubsystem = new ArmSubsystem();
-  private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
+  public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  public final ArmSubsystem armSubsystem = new ArmSubsystem();
+  public final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 
   // CommandJoystick rotationController = new CommandJoystick(1);
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -69,7 +70,7 @@ public class RobotContainer
   XboxController driverXbox = new XboxController(0);
   XboxController shooterXbox = new XboxController(1);
 
-  private final SendableChooser<Command> autoChooser;
+//  private final SendableChooser<Command> autoChooser;
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -78,16 +79,16 @@ public class RobotContainer
     // Configure the trigger bindings
     configureBindings();
 
-//    NamedCommands.registerCommand("Intake", intakeSubsystem.IntakeGamePiece());
-//    NamedCommands.registerCommand("Feed", intakeSubsystem.FeedShooter());
-//    NamedCommands.registerCommand("Intake Stop", intakeSubsystem.IntakeStop());
-//    NamedCommands.registerCommand("Shoot", shooterSubsystem.ShooterOn());
-//    NamedCommands.registerCommand("Shooter Stop", shooterSubsystem.ShooterStop());
-//   NamedCommands.registerCommand("Arm Lower", armSubsystem.ArmLower());
-//    NamedCommands.registerCommand("Arm Raise", armSubsystem.ArmRaise());
+   NamedCommands.registerCommand("Intake", new IntakeCommand(intakeSubsystem));
+   NamedCommands.registerCommand("Feed", new FeedShooterCommand(intakeSubsystem));
+  //  NamedCommands.registerCommand("Intake Stop", intakeSubsystem.IntakeStop());
+   NamedCommands.registerCommand("Shoot", new RunShooterCommand(shooterSubsystem));
+   NamedCommands.registerCommand("Shooter Stop", shooterSubsystem.ShooterStop());
+   NamedCommands.registerCommand("Arm Lower", new ArmLowerCommand(armSubsystem));
+   NamedCommands.registerCommand("Arm Raise", new ArmRaiseCommand(armSubsystem));
 
-autoChooser = AutoBuilder.buildAutoChooser();
-SmartDashboard.putData("Auto Chooser", autoChooser);
+// autoChooser = AutoBuilder.buildAutoChooser();
+// SmartDashboard.putData("Auto Chooser", autoChooser);
 
     AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
                                                                    () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
@@ -169,9 +170,9 @@ SmartDashboard.putData("Auto Chooser", autoChooser);
   public Command getAutonomousCommand()
   {
     // An example command will be run in autonomous
-//    return new PathPlannerAuto("Center");
-    return autoChooser.getSelected();
-  //  return null;
+   return new PathPlannerAuto("Center Speaker to Center Ring");
+//    return autoChooser.getSelected();
+   // return null;
   }
 
   public void setDriveMode()

@@ -31,8 +31,8 @@ public class ShooterSubsystem extends SubsystemBase {
     ShooterLowerSparkMax = new VictorSPX(Constants.kMotorPortShooterLower);
 //    ShooterUpperSparkMax = new CANSparkMax(Constants.kMotorPortShooterUpper, MotorType.kBrushed);
 //    ShooterLowerSparkMax = new CANSparkMax(Constants.kMotorPortShooterLower, MotorType.kBrushed);
-    ShooterUpperSparkMax.setInverted(true);
-    ShooterLowerSparkMax.setInverted(false);
+    ShooterUpperSparkMax.setInverted(false);
+    ShooterLowerSparkMax.setInverted(true);
   }
 
   public Command ShooterOn() {

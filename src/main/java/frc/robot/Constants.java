@@ -27,13 +27,13 @@ public final class Constants
 
   public static final int kMotorPortIntake  = 17;
 
-  public static final int kMotorPortClimberLeft  = 16;
+  public static final int kMotorPortClimberLeft  = 14;
   public static final int kMotorPortClimberRight  = 18;
 
   public static final int kMotorPortArm  = 14;
 
-  public static final int kMotorPortShooterUpper  = 14;
-  public static final int kMotorPortShooterLower  = 13;
+  public static final int kMotorPortShooterUpper  = 19;
+  public static final int kMotorPortShooterLower  = 15;
 
   public static final double kIntakeSpeed = 1.0;
   public static final double kShooterSpeed = 1.0;

@@ -78,6 +78,10 @@ public class RobotContainer
   {
     // Configure the trigger bindings
     configureBindings();
+    SmartDashboard.putNumber("Left_Y",driverXbox.getLeftY());
+    SmartDashboard.putNumber("Left_X",driverXbox.getLeftX());
+    SmartDashboard.putNumber("Right_X",driverXbox.getRightX());
+
 
    NamedCommands.registerCommand("Intake", new IntakeCommand(intakeSubsystem));
    NamedCommands.registerCommand("Feed", new FeedShooterCommand(intakeSubsystem));

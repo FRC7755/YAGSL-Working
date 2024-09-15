@@ -222,7 +222,7 @@ public class RobotContainer
        && DriverStation.getMatchTime() > 0
        && DriverStation.getMatchTime() <= 10)
        .onTrue(controllerRumbleCommand()
-       .withTimeout(0.2)
+       .withTimeout(0.5)
        .andThen(Commands.waitSeconds(0.1))
        .repeatedly()
        .withTimeout(0.9)); // Rumble three times

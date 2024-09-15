@@ -40,6 +40,8 @@ public final class Constants
   public static final double kArmSpeed = 1.0;
   public static final double kClimberSpeed = 1.0;
 
+  public static final double kRumbleForce = 1.0;
+
   public static final class AutonConstants
   {
 

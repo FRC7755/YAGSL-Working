@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 import frc.robot.Constants.OperatorConstants;
 //import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 //import frc.robot.commands.Command;
@@ -75,9 +76,9 @@ public class RobotContainer
   CommandJoystick driverController = new CommandJoystick(1);
 
   // CommandJoystick driverController   = new CommandJoystick(3);//(OperatorConstants.DRIVER_CONTROLLER_PORT);
-  XboxController driverXbox = new XboxController(0);
+  public final XboxController driverXbox = new XboxController(0);
   // XboxController shooterXbox = new XboxController(1);
-  GenericHID shooterXbox = new GenericHID(1);
+  public final GenericHID shooterXbox = new GenericHID(1);
 
  //  private final SendableChooser<Command> autoChooser;
   /**
@@ -146,39 +147,6 @@ public class RobotContainer
 
 
 
-    if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 30 && DriverStation.getMatchTime() >= 29)
-    {
-      controllerRumbleCommand();
-    }
-    else if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 20 && DriverStation.getMatchTime() >= 18)
-    {
-       controllerRumbleCommand();
-    }
-    else if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 10 && DriverStation.getMatchTime() >= 8)
-    {
-       controllerRumbleCommand();
-    }
-    else if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 5 && DriverStation.getMatchTime() >= 4.5)
-    {
-       controllerRumbleCommand();
-    }
-    else if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 4 && DriverStation.getMatchTime() >= 3.5)
-    {
-       controllerRumbleCommand();
-    }
-    else if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 3 && DriverStation.getMatchTime() >= 2.5)
-    {
-       controllerRumbleCommand();
-    }
-    else if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 2 && DriverStation.getMatchTime() >= 1.5)
-    {
-       controllerRumbleCommand();
-    }
-    else if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 1 && DriverStation.getMatchTime() >= 0.5)
-    {
-       controllerRumbleCommand();
-    }
-
   }
 
   /**
@@ -229,6 +197,57 @@ public class RobotContainer
     new JoystickButton(shooterXbox, 9).whileTrue(new ArmLowerCommand(armSubsystem));
     new JoystickButton(shooterXbox, 10).whileTrue(new ArmRaiseCommand(armSubsystem));
     //    new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new FeedShooterCommand(intakeSubsystem));
+
+    new Trigger(DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 30 && DriverStation.getMatchTime() >= 29).onTrue(controllerRumbleCommand().withTimeout(2));
+
+
+    if (DriverStation.getMatchTime() <= 30 && DriverStation.getMatchTime() >= 29)
+    {
+      //controllerRumbleCommand();
+      System.out.println("Rumble");
+      driverXbox.setRumble(RumbleType.kRightRumble, Constants.kRumbleForce);
+    }
+    else if (DriverStation.getMatchTime() <= 20 && DriverStation.getMatchTime() >= 18)
+    {
+      //controllerRumbleCommand();
+      driverXbox.setRumble(RumbleType.kBothRumble, Constants.kRumbleForce);
+    }
+    else if (DriverStation.getMatchTime() <= 10 && DriverStation.getMatchTime() >= 8)
+    {
+      //controllerRumbleCommand();
+      driverXbox.setRumble(RumbleType.kBothRumble, Constants.kRumbleForce);
+    }
+    else if (DriverStation.getMatchTime() <= 5 && DriverStation.getMatchTime() >= 4.5)
+    {
+      //controllerRumbleCommand();
+      driverXbox.setRumble(RumbleType.kBothRumble, Constants.kRumbleForce);
+    }
+    else if (DriverStation.getMatchTime() <= 4 && DriverStation.getMatchTime() >= 3.5)
+    {
+      //controllerRumbleCommand();
+      driverXbox.setRumble(RumbleType.kBothRumble, Constants.kRumbleForce);
+    }
+    else if (DriverStation.getMatchTime() <= 3 && DriverStation.getMatchTime() >= 2.5)
+    {
+      //controllerRumbleCommand();
+      driverXbox.setRumble(RumbleType.kBothRumble, Constants.kRumbleForce);
+    }
+    else if (DriverStation.getMatchTime() <= 2 && DriverStation.getMatchTime() >= 1.5)
+    {
+      //controllerRumbleCommand();
+      driverXbox.setRumble(RumbleType.kBothRumble, Constants.kRumbleForce);
+    }
+    else if (DriverStation.getMatchTime() <= 1 && DriverStation.getMatchTime() >= 0.5)
+    {
+      //controllerRumbleCommand();
+      driverXbox.setRumble(RumbleType.kBothRumble, Constants.kRumbleForce);
+    }
+    else
+    {
+      driverXbox.setRumble(RumbleType.kBothRumble, 0.0);
+    }
+
+
 
   }
 

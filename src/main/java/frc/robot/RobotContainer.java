@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
+//import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -73,7 +73,7 @@ public class RobotContainer
 
   // CommandJoystick rotationController = new CommandJoystick(1);
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  CommandJoystick driverController = new CommandJoystick(1);
+  // CommandJoystick driverController = new CommandJoystick(1);
 
   // CommandJoystick driverController   = new CommandJoystick(3);//(OperatorConstants.DRIVER_CONTROLLER_PORT);
   public final XboxController driverXbox = new XboxController(0);
@@ -222,7 +222,7 @@ public class RobotContainer
        && DriverStation.getMatchTime() > 0
        && DriverStation.getMatchTime() <= 10)
        .onTrue(controllerRumbleCommand()
-       .withTimeout(0.5)
+       .withTimeout(0.2)
        .andThen(Commands.waitSeconds(0.1))
        .repeatedly()
        .withTimeout(0.9)); // Rumble three times

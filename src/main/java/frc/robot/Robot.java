@@ -12,6 +12,11 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import java.io.File;
 import java.io.IOException;
 import swervelib.parser.SwerveParser;
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to each mode, as
@@ -27,6 +32,7 @@ public class Robot extends TimedRobot
   public RobotContainer m_robotContainer;
 
   private Timer disabledTimer;
+  PowerDistribution PDH1 = new PowerDistribution(1, ModuleType.kRev);
 
   public Robot()
   {
@@ -52,6 +58,7 @@ public class Robot extends TimedRobot
     // immediately when disabled, but then also let it be pushed more 
     disabledTimer = new Timer();
 
+
   }
 
   /**
@@ -69,8 +76,8 @@ public class Robot extends TimedRobot
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-
-    
+    SmartDashboard.putNumber("Climber_Left",PDH1.getCurrent(Constants.kClimberLeftPower));
+    SmartDashboard.putNumber("Climber_Right",PDH1.getCurrent(Constants.kClimberRightPower));
   }
 
   /**

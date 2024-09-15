@@ -42,6 +42,9 @@ public final class Constants
 
   public static final double kRumbleForce = 1.0;
 
+  public static final int kClimberRightPower = 1;
+  public static final int kClimberLeftPower = 9;
+
   public static final class AutonConstants
   {
 

@@ -14,87 +14,88 @@ import com.ctre.phoenix.motorcontrol.can.*;
 
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
 
   PowerDistribution PDH1 = new PowerDistribution(1, ModuleType.kRev);
-  private VictorSPX ClimberLeftSparkMax;
-  private VictorSPX ClimberRightSparkMax;
-//  private CANSparkMax ClimberLeftSparkMax;
-//  private CANSparkMax ClimberRightSparkMax;
+  private VictorSPX ClimberLeftMotor;
+  private VictorSPX ClimberRightMotor;
+//  private CANSparkMax ClimberLeftMotor;
+//  private CANSparkMax ClimberRightMotor;
   // DigitalInput toplimitSwitch = new DigitalInput(0);
   // DigitalInput bottomlimitSwitch = new DigitalInput(1);
 
   /** Creates a new Climber. */
   public ClimberSubsystem() {
 
-    ClimberLeftSparkMax = new VictorSPX(Constants.kMotorPortClimberLeft);
-    ClimberRightSparkMax = new VictorSPX(Constants.kMotorPortClimberRight);
-//    ClimberLeftSparkMax = new CANSparkMax(Constants.kMotorPortClimberLeft, MotorType.kBrushed);
-//    ClimberRightSparkMax = new CANSparkMax(Constants.kMotorPortClimberRight, MotorType.kBrushed);
-    ClimberLeftSparkMax.setInverted(true);
-    ClimberRightSparkMax.setInverted(false);
-    ClimberLeftSparkMax.setNeutralMode(NeutralMode.Brake);
-    ClimberRightSparkMax.setNeutralMode(NeutralMode.Brake);
+    ClimberLeftMotor = new VictorSPX(Constants.kMotorPortClimberLeft);
+    ClimberRightMotor = new VictorSPX(Constants.kMotorPortClimberRight);
+//    ClimberLeftMotor = new CANSparkMax(Constants.kMotorPortClimberLeft, MotorType.kBrushed);
+//    ClimberRightMotor = new CANSparkMax(Constants.kMotorPortClimberRight, MotorType.kBrushed);
+    ClimberLeftMotor.setInverted(true);
+    ClimberRightMotor.setInverted(false);
+    ClimberLeftMotor.setNeutralMode(NeutralMode.Brake);
+    ClimberRightMotor.setNeutralMode(NeutralMode.Brake);
   }
 
   public void ClimberRaise() {
-    ClimberLeftSparkMax.set(VictorSPXControlMode.PercentOutput, Constants.kClimberSpeed);
-    ClimberRightSparkMax.set(VictorSPXControlMode.PercentOutput, Constants.kClimberSpeed);
-//    ClimberLeftSparkMax.set(Constants.kClimberSpeed);
-//    ClimberRightSparkMax.set(Constants.kClimberSpeed);
+    ClimberLeftMotor.set(VictorSPXControlMode.PercentOutput, Constants.kClimberSpeed);
+    ClimberRightMotor.set(VictorSPXControlMode.PercentOutput, Constants.kClimberSpeed);
+//    ClimberLeftMotor.set(Constants.kClimberSpeed);
+//    ClimberRightMotor.set(Constants.kClimberSpeed);
   }
 
   public void ClimberLower() {
-    ClimberLeftSparkMax.set(VictorSPXControlMode.PercentOutput, -Constants.kClimberSpeed);
-    ClimberRightSparkMax.set(VictorSPXControlMode.PercentOutput, -Constants.kClimberSpeed);
-//    ClimberLeftSparkMax.set(-Constants.kClimberSpeed);
-//    ClimberRightSparkMax.set(-Constants.kClimberSpeed);
+    ClimberLeftMotor.set(VictorSPXControlMode.PercentOutput, -Constants.kClimberSpeed);
+    ClimberRightMotor.set(VictorSPXControlMode.PercentOutput, -Constants.kClimberSpeed);
+//    ClimberLeftMotor.set(-Constants.kClimberSpeed);
+//    ClimberRightMotor.set(-Constants.kClimberSpeed);
   }
 
   public void ClimberLeftRaise() {
-    ClimberLeftSparkMax.set(VictorSPXControlMode.PercentOutput, Constants.kClimberSpeed);
-//    ClimberLeftSparkMax.set(Constants.kClimberSpeed);
-//    ClimberRightSparkMax.set(Constants.kClimberSpeed);
+    ClimberLeftMotor.set(VictorSPXControlMode.PercentOutput, Constants.kClimberSpeed);
+//    ClimberLeftMotor.set(Constants.kClimberSpeed);
+//    ClimberRightMotor.set(Constants.kClimberSpeed);
   }
 
   public void ClimberLeftLower() {
-    ClimberLeftSparkMax.set(VictorSPXControlMode.PercentOutput, -Constants.kClimberSpeed);
-//    ClimberLeftSparkMax.set(-Constants.kClimberSpeed);
-//    ClimberRightSparkMax.set(-Constants.kClimberSpeed);
+    ClimberLeftMotor.set(VictorSPXControlMode.PercentOutput, -Constants.kClimberSpeed);
+//    ClimberLeftMotor.set(-Constants.kClimberSpeed);
+//    ClimberRightMotor.set(-Constants.kClimberSpeed);
   }
 
   public void ClimberRightLower() {
-    ClimberRightSparkMax.set(VictorSPXControlMode.PercentOutput, -Constants.kClimberSpeed);
-//    ClimberLeftSparkMax.set(-Constants.kClimberSpeed);
-//    ClimberRightSparkMax.set(-Constants.kClimberSpeed);
+    ClimberRightMotor.set(VictorSPXControlMode.PercentOutput, -Constants.kClimberSpeed);
+//    ClimberLeftMotor.set(-Constants.kClimberSpeed);
+//    ClimberRightMotor.set(-Constants.kClimberSpeed);
   }
 
   public void ClimberRightRaise() {
-    ClimberRightSparkMax.set(VictorSPXControlMode.PercentOutput, Constants.kClimberSpeed);
-//    ClimberLeftSparkMax.set(Constants.kClimberSpeed);
-//    ClimberRightSparkMax.set(Constants.kClimberSpeed);
+    ClimberRightMotor.set(VictorSPXControlMode.PercentOutput, Constants.kClimberSpeed);
+//    ClimberLeftMotor.set(Constants.kClimberSpeed);
+//    ClimberRightMotor.set(Constants.kClimberSpeed);
   }
   
   public void ClimberStop() {
-    ClimberLeftSparkMax.set(VictorSPXControlMode.PercentOutput, 0);
-    ClimberRightSparkMax.set(VictorSPXControlMode.PercentOutput, 0);
-//    ClimberLeftSparkMax.set(0);
-//    ClimberRightSparkMax.set(0);
+    ClimberLeftMotor.set(VictorSPXControlMode.PercentOutput, 0);
+    ClimberRightMotor.set(VictorSPXControlMode.PercentOutput, 0);
+//    ClimberLeftMotor.set(0);
+//    ClimberRightMotor.set(0);
   }
 
   public void ClimberLeftStop() {
-    ClimberLeftSparkMax.set(VictorSPXControlMode.PercentOutput, 0);
-//    ClimberLeftSparkMax.set(0);
-//    ClimberRightSparkMax.set(0);
+    ClimberLeftMotor.set(VictorSPXControlMode.PercentOutput, 0);
+//    ClimberLeftMotor.set(0);
+//    ClimberRightMotor.set(0);
   }
 
   public void ClimberRightStop() {
-    ClimberRightSparkMax.set(VictorSPXControlMode.PercentOutput, 0);
-//    ClimberLeftSparkMax.set(0);
-//    ClimberRightSparkMax.set(0);
+    ClimberRightMotor.set(VictorSPXControlMode.PercentOutput, 0);
+//    ClimberLeftMotor.set(0);
+//    ClimberRightMotor.set(0);
   }
 
   @Override

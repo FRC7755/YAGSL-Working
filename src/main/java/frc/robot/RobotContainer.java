@@ -198,7 +198,23 @@ public class RobotContainer
     new JoystickButton(shooterXbox, 10).whileTrue(new ArmRaiseCommand(armSubsystem));
     //    new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new FeedShooterCommand(intakeSubsystem));
 
-    new Trigger(DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 30 && DriverStation.getMatchTime() >= 29).onTrue(controllerRumbleCommand().withTimeout(2));
+//    new Trigger((),DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 30 && DriverStation.getMatchTime() >= 29).onTrue(controllerRumbleCommand().withTimeout(2));
+
+    new Trigger(
+      () ->
+      DriverStation.isTeleopEnabled()
+       && DriverStation.getMatchTime() > 0
+       && DriverStation.getMatchTime() <= 30)
+       .onTrue(controllerRumbleCommand()
+       .withTimeout(1));
+
+    new Trigger(
+      () ->
+      DriverStation.isTeleopEnabled()
+       && DriverStation.getMatchTime() > 0
+       && DriverStation.getMatchTime() <= 20)
+       .onTrue(controllerRumbleCommand()
+       .withTimeout(2));
 
 
     if (DriverStation.getMatchTime() <= 30 && DriverStation.getMatchTime() >= 29)

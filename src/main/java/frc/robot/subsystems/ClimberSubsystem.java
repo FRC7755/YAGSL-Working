@@ -12,6 +12,8 @@ import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 //import com.revrobotics.CANSparkMax;
 
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -19,6 +21,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
   private VictorSPX ClimberLeftSparkMax;
   private VictorSPX ClimberRightSparkMax;
+  PowerDistribution PDH1 = new PowerDistribution(1, ModuleType.kRev);
 //  private CANSparkMax ClimberLeftSparkMax;
 //  private CANSparkMax ClimberRightSparkMax;
   // DigitalInput toplimitSwitch = new DigitalInput(0);

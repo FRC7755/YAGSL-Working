@@ -7,12 +7,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class RunShooterCommand extends Command {
+public class RunShooterBackwardCommand extends Command {
   /** Creates a new ClimberDownCommand. */
 
   private final ShooterSubsystem shooterSubsystem;
 
-  public RunShooterCommand(ShooterSubsystem subsystem) {
+  public RunShooterBackwardCommand(ShooterSubsystem subsystem) {
     shooterSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements( shooterSubsystem );
@@ -25,7 +25,7 @@ public class RunShooterCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooterSubsystem.ShooterOn();
+    shooterSubsystem.ShooterOnBackward();
   }
 
   // Called once the command ends or is interrupted.

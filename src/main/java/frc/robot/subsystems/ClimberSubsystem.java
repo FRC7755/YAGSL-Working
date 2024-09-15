@@ -19,9 +19,9 @@ import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
 
+  PowerDistribution PDH1 = new PowerDistribution(1, ModuleType.kRev);
   private VictorSPX ClimberLeftSparkMax;
   private VictorSPX ClimberRightSparkMax;
-  PowerDistribution PDH1 = new PowerDistribution(1, ModuleType.kRev);
 //  private CANSparkMax ClimberLeftSparkMax;
 //  private CANSparkMax ClimberRightSparkMax;
   // DigitalInput toplimitSwitch = new DigitalInput(0);
@@ -54,8 +54,44 @@ public class ClimberSubsystem extends SubsystemBase {
 //    ClimberRightSparkMax.set(-Constants.kClimberSpeed);
   }
 
+  public void ClimberLeftRaise() {
+    ClimberLeftSparkMax.set(VictorSPXControlMode.PercentOutput, Constants.kClimberSpeed);
+//    ClimberLeftSparkMax.set(Constants.kClimberSpeed);
+//    ClimberRightSparkMax.set(Constants.kClimberSpeed);
+  }
+
+  public void ClimberLeftLower() {
+    ClimberLeftSparkMax.set(VictorSPXControlMode.PercentOutput, -Constants.kClimberSpeed);
+//    ClimberLeftSparkMax.set(-Constants.kClimberSpeed);
+//    ClimberRightSparkMax.set(-Constants.kClimberSpeed);
+  }
+
+  public void ClimberRightLower() {
+    ClimberRightSparkMax.set(VictorSPXControlMode.PercentOutput, -Constants.kClimberSpeed);
+//    ClimberLeftSparkMax.set(-Constants.kClimberSpeed);
+//    ClimberRightSparkMax.set(-Constants.kClimberSpeed);
+  }
+
+  public void ClimberRightRaise() {
+    ClimberRightSparkMax.set(VictorSPXControlMode.PercentOutput, Constants.kClimberSpeed);
+//    ClimberLeftSparkMax.set(Constants.kClimberSpeed);
+//    ClimberRightSparkMax.set(Constants.kClimberSpeed);
+  }
+  
   public void ClimberStop() {
     ClimberLeftSparkMax.set(VictorSPXControlMode.PercentOutput, 0);
+    ClimberRightSparkMax.set(VictorSPXControlMode.PercentOutput, 0);
+//    ClimberLeftSparkMax.set(0);
+//    ClimberRightSparkMax.set(0);
+  }
+
+  public void ClimberLeftStop() {
+    ClimberLeftSparkMax.set(VictorSPXControlMode.PercentOutput, 0);
+//    ClimberLeftSparkMax.set(0);
+//    ClimberRightSparkMax.set(0);
+  }
+
+  public void ClimberRightStop() {
     ClimberRightSparkMax.set(VictorSPXControlMode.PercentOutput, 0);
 //    ClimberLeftSparkMax.set(0);
 //    ClimberRightSparkMax.set(0);

@@ -35,9 +35,17 @@ public class ShooterSubsystem extends SubsystemBase {
     ShooterLowerSparkMax.setInverted(true);
   }
 
-  public Command ShooterOn() {
+  public Command ShooterOnForward() {
     ShooterUpperSparkMax.set(VictorSPXControlMode.PercentOutput, Constants.kShooterSpeed);
     ShooterLowerSparkMax.set(VictorSPXControlMode.PercentOutput, Constants.kShooterSpeed);
+//    ShooterUpperSparkMax.set(Constants.kShooterSpeed);
+//    ShooterLowerSparkMax.set(Constants.kShooterSpeed);
+    return null;
+  }
+
+  public Command ShooterOnBackward() {
+    ShooterUpperSparkMax.set(VictorSPXControlMode.PercentOutput, -Constants.kShooterSpeed);
+    ShooterLowerSparkMax.set(VictorSPXControlMode.PercentOutput, -Constants.kShooterSpeed);
 //    ShooterUpperSparkMax.set(Constants.kShooterSpeed);
 //    ShooterLowerSparkMax.set(Constants.kShooterSpeed);
     return null;

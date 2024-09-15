@@ -8,8 +8,11 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -22,9 +25,10 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
+//import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 //import frc.robot.commands.Command;
-import frc.robot.commands.RunShooterCommand;
+import frc.robot.commands.RunShooterForwardCommand;
+import frc.robot.commands.RunShooterBackwardCommand;
 //import frc.robot.commands.FeedShooterCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.OuttakeCommand;
@@ -32,6 +36,10 @@ import frc.robot.commands.ArmLowerCommand;
 import frc.robot.commands.ArmRaiseCommand;
 import frc.robot.commands.ClimberLowerCommand;
 import frc.robot.commands.ClimberRaiseCommand;
+import frc.robot.commands.ClimberLeftLowerCommand;
+import frc.robot.commands.ClimberRightLowerCommand;
+import frc.robot.commands.ClimberLeftRaiseCommand;
+import frc.robot.commands.ClimberRightRaiseCommand;
 import frc.robot.commands.FeedShooterCommand;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -68,9 +76,10 @@ public class RobotContainer
 
   // CommandJoystick driverController   = new CommandJoystick(3);//(OperatorConstants.DRIVER_CONTROLLER_PORT);
   XboxController driverXbox = new XboxController(0);
-  XboxController shooterXbox = new XboxController(1);
+  // XboxController shooterXbox = new XboxController(1);
+  GenericHID shooterXbox = new GenericHID(1);
 
-//  private final SendableChooser<Command> autoChooser;
+ //  private final SendableChooser<Command> autoChooser;
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -86,7 +95,7 @@ public class RobotContainer
    NamedCommands.registerCommand("Intake", new IntakeCommand(intakeSubsystem));
    NamedCommands.registerCommand("Feed", new FeedShooterCommand(intakeSubsystem));
   //  NamedCommands.registerCommand("Intake Stop", intakeSubsystem.IntakeStop());
-   NamedCommands.registerCommand("Shoot", new RunShooterCommand(shooterSubsystem));
+   NamedCommands.registerCommand("Shoot", new RunShooterForwardCommand(shooterSubsystem));
    NamedCommands.registerCommand("Shooter Stop", shooterSubsystem.ShooterStop());
    NamedCommands.registerCommand("Arm Lower", new ArmLowerCommand(armSubsystem));
    NamedCommands.registerCommand("Arm Raise", new ArmRaiseCommand(armSubsystem));
@@ -94,7 +103,7 @@ public class RobotContainer
 // autoChooser = AutoBuilder.buildAutoChooser();
 // SmartDashboard.putData("Auto Chooser", autoChooser);
 
-    AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
+/*    AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
                                                                    () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
                                                                                                 OperatorConstants.LEFT_Y_DEADBAND),
                                                                    () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
@@ -105,18 +114,18 @@ public class RobotContainer
                                                                    driverXbox::getAButtonPressed,
                                                                    driverXbox::getXButtonPressed,
                                                                    driverXbox::getBButtonPressed);
-
+*/
     // Applies deadbands and inverts controls because joysticks
     // are back-right positive while robot
     // controls are front-left positive
     // left stick controls translation
     // right stick controls the desired angle NOT angular rotation
-    Command driveFieldOrientedDirectAngle = drivebase.driveCommand(
+/*    Command driveFieldOrientedDirectAngle = drivebase.driveCommand(
         () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
         () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
         () -> MathUtil.applyDeadband(driverXbox.getRightX(), OperatorConstants.RIGHT_X_DEADBAND),
         () -> MathUtil.applyDeadband(driverXbox.getRightY(), OperatorConstants.RIGHT_Y_DEADBAND));
-
+*/
     // Applies deadbands and inverts controls because joysticks
     // are back-right positive while robot
     // controls are front-left positive
@@ -134,6 +143,42 @@ public class RobotContainer
 
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation() ? driveFieldOrientedAnglularVelocity : driveFieldOrientedDirectAngleSim);
+
+
+
+    if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 30 && DriverStation.getMatchTime() >= 29)
+    {
+      controllerRumbleCommand();
+    }
+    else if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 20 && DriverStation.getMatchTime() >= 18)
+    {
+       controllerRumbleCommand();
+    }
+    else if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 10 && DriverStation.getMatchTime() >= 8)
+    {
+       controllerRumbleCommand();
+    }
+    else if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 5 && DriverStation.getMatchTime() >= 4.5)
+    {
+       controllerRumbleCommand();
+    }
+    else if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 4 && DriverStation.getMatchTime() >= 3.5)
+    {
+       controllerRumbleCommand();
+    }
+    else if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 3 && DriverStation.getMatchTime() >= 2.5)
+    {
+       controllerRumbleCommand();
+    }
+    else if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 2 && DriverStation.getMatchTime() >= 1.5)
+    {
+       controllerRumbleCommand();
+    }
+    else if (DriverStation.isTeleopEnabled() && DriverStation.getMatchTime() <= 1 && DriverStation.getMatchTime() >= 0.5)
+    {
+       controllerRumbleCommand();
+    }
+
   }
 
   /**
@@ -157,12 +202,33 @@ public class RobotContainer
     new JoystickButton(driverXbox, 4).whileTrue(new ClimberRaiseCommand(climberSubsystem));
     new JoystickButton(driverXbox, 1).whileTrue(new ClimberLowerCommand(climberSubsystem));
 
-    new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new RunShooterCommand(shooterSubsystem));
+/*  XBox Controller stuff
+      new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new RunShooterCommand(shooterSubsystem));
 //    new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new FeedShooterCommand(intakeSubsystem));
     new JoystickButton(shooterXbox, Button.kX.value).whileTrue(new IntakeCommand(intakeSubsystem));
     new JoystickButton(shooterXbox, Button.kB.value).whileTrue(new OuttakeCommand(intakeSubsystem));
     new JoystickButton(shooterXbox, Button.kRightBumper.value).whileTrue(new ArmLowerCommand(armSubsystem));
     new JoystickButton(shooterXbox, Button.kLeftBumper.value).whileTrue(new ArmRaiseCommand(armSubsystem));
+*/
+
+
+    new JoystickButton(shooterXbox, 1).whileTrue(new ClimberRaiseCommand(climberSubsystem));
+    new JoystickButton(shooterXbox, 5).whileTrue(new ClimberLeftRaiseCommand(climberSubsystem));
+    new JoystickButton(shooterXbox, 3).whileTrue(new ClimberRightRaiseCommand(climberSubsystem));
+
+    new JoystickButton(shooterXbox, 2).whileTrue(new ClimberLowerCommand(climberSubsystem));
+    new JoystickButton(shooterXbox, 6).whileTrue(new ClimberLeftLowerCommand(climberSubsystem));
+    new JoystickButton(shooterXbox, 4).whileTrue(new ClimberRightLowerCommand(climberSubsystem));
+
+    new JoystickButton(shooterXbox,11).whileTrue(new RunShooterForwardCommand(shooterSubsystem));
+    new JoystickButton(shooterXbox,12).whileTrue(new RunShooterBackwardCommand(shooterSubsystem));
+
+    new JoystickButton(shooterXbox, 8).whileTrue(new IntakeCommand(intakeSubsystem));
+    new JoystickButton(shooterXbox, 7).whileTrue(new OuttakeCommand(intakeSubsystem));
+
+    new JoystickButton(shooterXbox, 9).whileTrue(new ArmLowerCommand(armSubsystem));
+    new JoystickButton(shooterXbox, 10).whileTrue(new ArmRaiseCommand(armSubsystem));
+    //    new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new FeedShooterCommand(intakeSubsystem));
 
   }
 
@@ -188,4 +254,17 @@ public class RobotContainer
   {
     drivebase.setMotorBrake(brake);
   }
+
+private Command controllerRumbleCommand() {
+    return Commands.startEnd(
+        () -> {
+          driverXbox.setRumble(RumbleType.kBothRumble, 1.0);
+          //operatorXBox.setRumble(RumbleType.kBothRumble, 1.0);
+        },
+        () -> {
+          driverXbox.setRumble(RumbleType.kBothRumble, 0.0);
+          //operatorXbox.setRumble(RumbleType.kBothRumble, 0.0);
+        });
+  }
+
 }

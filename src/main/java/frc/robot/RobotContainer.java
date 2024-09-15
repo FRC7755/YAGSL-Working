@@ -216,6 +216,17 @@ public class RobotContainer
        .onTrue(controllerRumbleCommand()
        .withTimeout(2));
 
+    new Trigger(
+      () ->
+      DriverStation.isTeleopEnabled()
+       && DriverStation.getMatchTime() > 0
+       && DriverStation.getMatchTime() <= 10)
+       .onTrue(controllerRumbleCommand()
+       .withTimeout(0.2)
+       .andThen(Commands.waitSeconds(0.1))
+       .repeatedly()
+       .withTimeout(0.9)); // Rumble three times
+
 
     if (DriverStation.getMatchTime() <= 30 && DriverStation.getMatchTime() >= 29)
     {

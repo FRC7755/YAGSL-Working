@@ -20,7 +20,7 @@ import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
 
-  PowerDistribution PDH1 = new PowerDistribution(1, ModuleType.kRev);
+  //PowerDistribution PDH1 = new PowerDistribution(1, ModuleType.kRev);
   private VictorSPX ClimberLeftMotor;
   private VictorSPX ClimberRightMotor;
 //  private CANSparkMax ClimberLeftMotor;

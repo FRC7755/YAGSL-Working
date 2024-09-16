@@ -257,7 +257,7 @@ public Command sysIdAngleMotorCommand() {
       // Make the robot move
       swerveDrive.drive(new Translation2d(Math.pow(translationX.getAsDouble(), 1) * swerveDrive.getMaximumVelocity(),
                                           Math.pow(translationY.getAsDouble(), 1) * swerveDrive.getMaximumVelocity()),
-                        Math.pow(angularRotationX.getAsDouble(), 3) * swerveDrive.getMaximumAngularVelocity(),
+                        Math.pow(angularRotationX.getAsDouble(), 1) * swerveDrive.getMaximumAngularVelocity(),
                         true,
                         false);
     });

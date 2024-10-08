@@ -29,6 +29,8 @@ import frc.robot.Constants.OperatorConstants;
 //import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 //import frc.robot.commands.Command;
 import frc.robot.commands.RunShooterForwardCommand;
+import frc.robot.commands.RunShooterForward50Command;
+import frc.robot.commands.RunShooterForward75Command;
 import frc.robot.commands.RunShooterBackwardCommand;
 //import frc.robot.commands.FeedShooterCommand;
 import frc.robot.commands.IntakeCommand;
@@ -167,8 +169,8 @@ public class RobotContainer
         Commands.deferredProxy(() -> drivebase.driveToPose(
                                    new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))
                               ));
-    new JoystickButton(driverXbox, 4).whileTrue(new ClimberRaiseCommand(climberSubsystem));
-    new JoystickButton(driverXbox, 1).whileTrue(new ClimberLowerCommand(climberSubsystem));
+    //new JoystickButton(driverXbox, 4).whileTrue(new ClimberRaiseCommand(climberSubsystem));
+    //new JoystickButton(driverXbox, 1).whileTrue(new ClimberLowerCommand(climberSubsystem));
 
 /*  XBox Controller stuff
       new JoystickButton(shooterXbox, Button.kY.value).whileTrue(new RunShooterCommand(shooterSubsystem));
@@ -180,16 +182,18 @@ public class RobotContainer
 */
 
 
-    new JoystickButton(shooterXbox, 1).whileTrue(new ClimberRaiseCommand(climberSubsystem));
-    new JoystickButton(shooterXbox, 5).whileTrue(new ClimberLeftRaiseCommand(climberSubsystem));
-    new JoystickButton(shooterXbox, 3).whileTrue(new ClimberRightRaiseCommand(climberSubsystem));
+    //new JoystickButton(shooterXbox, 1).whileTrue(new ClimberRaiseCommand(climberSubsystem));
+    //new JoystickButton(shooterXbox, 5).whileTrue(new ClimberLeftRaiseCommand(climberSubsystem));
+    //new JoystickButton(shooterXbox, 3).whileTrue(new ClimberRightRaiseCommand(climberSubsystem));
 
-    new JoystickButton(shooterXbox, 2).whileTrue(new ClimberLowerCommand(climberSubsystem));
-    new JoystickButton(shooterXbox, 6).whileTrue(new ClimberLeftLowerCommand(climberSubsystem));
-    new JoystickButton(shooterXbox, 4).whileTrue(new ClimberRightLowerCommand(climberSubsystem));
+    //new JoystickButton(shooterXbox, 2).whileTrue(new ClimberLowerCommand(climberSubsystem));
+    //new JoystickButton(shooterXbox, 6).whileTrue(new ClimberLeftLowerCommand(climberSubsystem));
+    //new JoystickButton(shooterXbox, 4).whileTrue(new ClimberRightLowerCommand(climberSubsystem));
 
     new JoystickButton(shooterXbox,11).whileTrue(new RunShooterForwardCommand(shooterSubsystem));
     new JoystickButton(shooterXbox,12).whileTrue(new RunShooterBackwardCommand(shooterSubsystem));
+    new JoystickButton(shooterXbox, 1).whileTrue(new RunShooterForward50Command(shooterSubsystem));
+    new JoystickButton(shooterXbox, 2).whileTrue(new RunShooterForward75Command(shooterSubsystem));
 
     new JoystickButton(shooterXbox, 8).whileTrue(new IntakeCommand(intakeSubsystem));
     new JoystickButton(shooterXbox, 7).whileTrue(new OuttakeCommand(intakeSubsystem));

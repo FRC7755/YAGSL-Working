@@ -98,7 +98,9 @@ public class RobotContainer
    NamedCommands.registerCommand("Intake", new IntakeCommand(intakeSubsystem));
    NamedCommands.registerCommand("Feed", new FeedShooterCommand(intakeSubsystem));
   //  NamedCommands.registerCommand("Intake Stop", intakeSubsystem.IntakeStop());
-   NamedCommands.registerCommand("Shoot", new RunShooterForward100Command(shooterSubsystem));
+   NamedCommands.registerCommand("Shoot 50", new RunShooterForward50Command(shooterSubsystem));
+   NamedCommands.registerCommand("Shoot 75", new RunShooterForward75Command(shooterSubsystem));
+   NamedCommands.registerCommand("Shoot 100", new RunShooterForward100Command(shooterSubsystem));
    NamedCommands.registerCommand("Shooter Stop", shooterSubsystem.ShooterStop());
    NamedCommands.registerCommand("Arm Lower", new ArmLowerCommand(armSubsystem));
    NamedCommands.registerCommand("Arm Raise", new ArmRaiseCommand(armSubsystem));
@@ -290,7 +292,7 @@ public class RobotContainer
   public Command getAutonomousCommand()
   {
     // An example command will be run in autonomous
-   return new PathPlannerAuto("Center Speaker to Center Ring");
+   return new PathPlannerAuto("Blue Right Speaker to Right Ring");
 //    return autoChooser.getSelected();
    // return null;
   }

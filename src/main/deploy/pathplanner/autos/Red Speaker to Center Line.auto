@@ -12,19 +12,19 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ArmLower"
+                  "name": "Arm Lower"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "Shoot 50"
+                  "name": "Shoot 100"
                 }
               },
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 1.0
+                  "waitTime": 2.0
                 }
               }
             ]
@@ -50,9 +50,9 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "Red - Speaker to Center Line"
+            "name": "Shooter Stop"
           }
         }
       ]

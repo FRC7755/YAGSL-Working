@@ -18,7 +18,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Shoot 50"
+                  "name": "Shoot 100"
                 }
               },
               {
@@ -50,9 +50,9 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "Blue - Speaker to Center Line"
+            "name": "Shooter Stop"
           }
         }
       ]

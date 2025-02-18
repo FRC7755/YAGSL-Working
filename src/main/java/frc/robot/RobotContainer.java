@@ -292,9 +292,9 @@ public class RobotContainer
   public Command getAutonomousCommand()
   {
     // An example command will be run in autonomous
-   return new PathPlannerAuto("Blue Speaker to Center Line");
+//   return new PathPlannerAuto("Blue Speaker to Center Line");
 //    return autoChooser.getSelected();
-   // return null;
+    return null;
   }
 
   public void setDriveMode()
